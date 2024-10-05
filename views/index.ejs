@@ -6,7 +6,9 @@
             <li>
                 <%= messages[i].user %>:&nbsp;<%=messages[i].text%>
                 &nbsp;-&nbsp; <%= format(new Date(messages[i].added),
-                "MM/dd/yyyy HH:mm") %> <%= console.log(messages[i]); %>
+                "MM/dd/yyyy HH:mm") %>
+                <a href="/<%= i %>"><button>View Message</button></a>
+                <%= console.log(messages[i]); %>
             </li>
             <% } %>
             <a href="/new">Add new message!</a>
