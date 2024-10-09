@@ -4,10 +4,10 @@
         <ul>
             <% for(let i = 0; i < messages.length; i++) { %>
             <li>
-                <%= messages[i].user %>:&nbsp;<%=messages[i].text%>
-                &nbsp;-&nbsp; <%= format(new Date(messages[i].added),
+                <%= messages[i].username %>:&nbsp;<%=messages[i].message%>
+                &nbsp;-&nbsp; <%= format(new Date(messages[i].date_added),
                 "MM/dd/yyyy HH:mm") %>
-                <a href="/<%= i %>"><button>View Message</button></a>
+                <a href="/<%= i+1 %>"><button>View Message</button></a>
                 <%= console.log(messages[i]); %>
             </li>
             <% } %>

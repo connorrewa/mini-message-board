@@ -2,6 +2,7 @@ const { Router } = require('express');
 
 const indexRouter = Router();
 const { format } = require('date-fns');
+const db = require('../db/queries');
 
 const messages = [
     {
@@ -20,9 +21,10 @@ indexRouter.get('/new', (req, res) => {
     res.render('form');
 });
 
-indexRouter.get('/:id', (req, res) => {
+indexRouter.get('/:id', async (req, res) => {
     const messageId = req.params.id;
-    const message = messages[messageId];
+    const message = await db.getMessageById(messageId);
+    console.log(message);
     if (message) {
         res.render('message', {
             title: `Message ${messageId}`,
@@ -35,16 +37,15 @@ indexRouter.get('/:id', (req, res) => {
     console.log(messageId);
 });
 
-indexRouter.post('/new', (req, res) => {
-    messages.push({
-        text: req.body.messageText,
-        user: req.body.authorName,
-        added: new Date(),
-    });
+indexRouter.post('/new', async (req, res) => {
+    await db.postNewMessage(req.body.messageText, req.body.authorName);
     res.redirect('/');
 });
 
-indexRouter.get('/', (req, res) => {
+indexRouter.get('/', async (req, res) => {
+    const messages = await db.getAllMessages();
+    console.log(messages);
+
     res.render('index', {
         title: 'Mini Messageboard',
         messages: messages,

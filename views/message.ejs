@@ -1,7 +1,7 @@
 <html>
     <body>
         <h1><%= title %></h1>
-        <%= message.user %>:&nbsp;<%=message.text%> &nbsp;-&nbsp; <%= format(new
-        Date(message.added), "MM/dd/yyyy HH:mm") %>
+        <%= message.username %>:&nbsp;<%=message.message%> &nbsp;-&nbsp; <%=
+        format(new Date(message.date_added), "MM/dd/yyyy HH:mm") %>
     </body>
 </html>
